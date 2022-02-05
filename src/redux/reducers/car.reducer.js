@@ -1,15 +1,16 @@
-import {END_LOADING, LOAD_CARS, SAVE_CAR, START_LOADING} from "../actions";
+import {END_LOADING, LOAD_CARS, SAVE_CAR, SET_CARS, START_LOADING} from "../actions";
 
 const initState = {
     isLoading: false,
     cars: []
 }
 export const carReducer = (state = initState, action) => {
+    console.log(action);
     switch (action.type) {
 
         case START_LOADING:
             return {...state, isLoading: true};
-        case LOAD_CARS:
+        case SET_CARS:
             return {...state, cars: action.payload};
         case END_LOADING:
             return {...state, isLoading: false}

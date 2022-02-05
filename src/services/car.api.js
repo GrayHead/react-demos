@@ -7,8 +7,10 @@ let axiosInstance = axios.create({
 const getCars = () => {
     return axiosInstance.get('');
 }
-const postCar = (car) => {
+const saveCar = (car) => {
     return axiosInstance.post('', car);
 
 }
+
+export {getCars, saveCar}
 

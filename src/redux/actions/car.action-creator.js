@@ -1,4 +1,5 @@
-import {END_LOADING, LOAD_CARS, SAVE_CAR, START_LOADING} from "./car.action";
+import {END_LOADING, LOAD_CARS, SAVE_CAR, SET_CARS, START_LOADING} from "./car.action";
+import {getCars} from "../../services/car.api";
 
 export const startLoading = () => {
     return {type: START_LOADING}
@@ -6,13 +7,15 @@ export const startLoading = () => {
 export const endLoading = () => {
     return {type: END_LOADING}
 }
-export const loadCars = (payload) => {
-    return {type: LOAD_CARS, payload}
-}
-export const saveCar = (payload) => {
-    return {type: SAVE_CAR, payload}
+const setCars = (payload) => {
+    return {type: SET_CARS, payload}
 }
 
-const saveCar = async ()=> (dispatch)=> {
+export const fetchCars = () => async (dispatch) => {
+    dispatch(startLoading());
+    let response = await getCars();
+    console.log(response)
+    dispatch(setCars(response.data))
+    dispatch(endLoading());
 
 }
