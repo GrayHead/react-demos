@@ -1,25 +1,43 @@
 import './App.css';
-import SimpsonComponent from "./components/SimpsonComponent";
+import {w3cwebsocket as W3CWebSocket} from "websocket";
+import {useEffect, useState} from "react";
 
+const url = 'ws://localhost:8080/ws';
+
+
+function bulder() {
+    return new W3CWebSocket(url);
+}
 function App() {
+    let [msgs, setMsgs] = useState([]);
+    let [client, setClient] = useState(bulder);
 
-    return (
-        <div className="wrap">
-            <SimpsonComponent
-                itemName={'bart'}
-                pic={'https://upload.wikimedia.org/wikipedia/uk/a/aa/Bart_simpson.png'}
-            />
-            <SimpsonComponent
-                itemName={'homer'}
-                pic={'https://upload.wikimedia.org/wikipedia/uk/0/02/Homer_Simpson_2006.png'}
-            />
+    useEffect(() => {
+        console.log('asdjgasj');
+        client.onopen = () => {
+            console.log('open');
+        }
+        client.onmessage = (e) => {
+            console.log(e.data);
+            msgs.push(e.data);
+            setMsgs([...msgs]);
+        }
+    }, [client])
 
-            <SimpsonComponent
-                itemName={'Marge'}
-                pic={'https://upload.wikimedia.org/wikipedia/ru/0/0b/Marge_Simpson.png'}
-            />
+    return (<div>
 
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                let messageToChat = e.target.message.value;
+                client.send(messageToChat);
+            }}>
+                <input type="text" name={'message'}/>
+                <button>send</button>
+            </form>
+            <div>
+                {msgs.map(msg => <div>{msg}</div>)}
 
+            </div>
         </div>
 
     );
