@@ -5,15 +5,15 @@ import {useEffect, useState} from "react";
 const url = 'ws://localhost:8080/ws';
 
 
-function bulder() {
+function builder() {
     return new W3CWebSocket(url);
 }
+
 function App() {
     let [msgs, setMsgs] = useState([]);
-    let [client, setClient] = useState(bulder);
+    let [client, setClient] = useState(builder);
 
     useEffect(() => {
-        console.log('asdjgasj');
         client.onopen = () => {
             console.log('open');
         }
