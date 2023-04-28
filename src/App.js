@@ -1,11 +1,15 @@
 import './App.css';
-import {Cars, Form} from "./components";
+import {useSelector} from "react-redux";
+import UsersComponent from "./components/UsersComponent";
+import PostsComponent from "./components/PostsComponent";
 
 function App() {
+
     return (
         <div>
-            <Form/>
-            <Cars/>
+            <UsersComponent/>
+            <PostsComponent/>
+
 
         </div>
     );
