@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {LOAD_POSTS} from "../../redux";
 
 const PostsComponent = () => {
 
@@ -9,7 +10,7 @@ const PostsComponent = () => {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(value => value.json())
             .then(value => {
-                dispatch({type: 'LOAD_POSTS', payload: value});
+                dispatch({type: LOAD_POSTS, payload: value});
             });
 
     }, [])

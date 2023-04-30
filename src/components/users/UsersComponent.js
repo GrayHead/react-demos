@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import {ADD_USERS, LOAD_USERS} from "../../redux";
 
 const UsersComponent = () => {
     const users = useSelector(state => {
@@ -8,13 +9,12 @@ const UsersComponent = () => {
     });
 
     const dispatch = useDispatch();
-
     useEffect(() => {
 
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(value => value.json())
             .then(value => {
-                dispatch({type: 'LOAD_USERS', payload: value})
+                dispatch({type: LOAD_USERS, payload: value})
             });
 
 
@@ -29,7 +29,7 @@ const UsersComponent = () => {
             }
 
             <button onClick={() => {
-                dispatch({type: 'ADD_USER', payload: {id: new Date().getMilliseconds(), name: 'vasya shevchenko'}})
+                dispatch({type: ADD_USERS, payload: {id: new Date().getMilliseconds(), name: 'vasya shevchenko'}})
             }}>add user
             </button>
             <hr/>
