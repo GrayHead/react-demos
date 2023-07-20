@@ -2,7 +2,7 @@ import './App.css';
 import {w3cwebsocket as W3CWebSocket} from "websocket";
 import {useEffect, useState} from "react";
 
-const url = 'ws://localhost:8080/ws';
+const url = 'ws://localhost:8080/chat';
 
 
 function bulder() {
@@ -13,7 +13,7 @@ function App() {
     let [client, setClient] = useState(bulder);
 
     useEffect(() => {
-        console.log('asdjgasj');
+        console.log('useeffect');
         client.onopen = () => {
             console.log('open');
         }
